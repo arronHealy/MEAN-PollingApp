@@ -2,15 +2,52 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CreatePollComponent } from './create-poll/create-poll.component';
+import { PollListComponent } from './poll-list/poll-list.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule, MatDividerModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, MatListModule} from '@angular/material';
+import { RouterModule, Routes} from '@angular/router';
+import { PollService } from 'src/app/poll.service';
+
+const appRoutes: Routes = [
+  {
+    path: 'list',
+    component: PollListComponent
+  },
+  {
+    path: 'create',
+    component: CreatePollComponent
+  },
+];
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreatePollComponent,
+    PollListComponent,
+    AppHeaderComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(appRoutes),
+    BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatRadioModule,
+    MatDividerModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatListModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PollService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,25 @@
+<mat-accordion multi="true" *ngIf="polls.length > 0">
+    <mat-expansion-panel *ngFor="let p of getPolls()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        {{p.question}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <hr>
+      <mat-list *ngFor="let o of p.options">
+        <mat-list-item>
+        <mat-radio-button></mat-radio-button>
+         Option {{o.optionId + 1}} : {{o.answer}}
+        </mat-list-item>
+      </mat-list>
+      <p class="vote-text mat-body-1">
+        Total Votes for Poll: {{p.totalVotes}}
+      </p>
+    </mat-expansion-panel>
+    <br>
+    <br>
+  </mat-accordion>
+  
+  <p class="text-info mat-body-1" *ngIf="polls.length <= 0">
+  No polls added yet...
+  </p>
