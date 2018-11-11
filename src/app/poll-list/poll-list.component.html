@@ -1,20 +1,24 @@
 <mat-accordion multi="true" *ngIf="polls.length > 0">
-    <mat-expansion-panel *ngFor="let p of getPolls()">
+    <mat-expansion-panel *ngFor="let p of polls; let pollId = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
         {{p.question}}
         </mat-panel-title>
       </mat-expansion-panel-header>
       <hr>
-      <mat-list *ngFor="let o of p.options">
+      <mat-list *ngFor="let o of p.options; let voteOption = index">
         <mat-list-item>
-        <mat-radio-button></mat-radio-button>
+        <mat-radio-button (click)="setVote(voteOption, pollId)"></mat-radio-button>
          Option {{o.optionId + 1}} : {{o.answer}}
         </mat-list-item>
-        <br><br>
+        <p id="numVotes" class="mat-body-1" *ngIf="p.totalVotes > 0">
+          Option {{o.optionId + 1}} has {{(o.numVotes / p.totalVotes) * 100 | number}}% of the Votes. 
+        </p>
+        <br>
+        <hr>
       </mat-list>
       <br>
-      <button mat-raised-button color="primary">Submit Vote</button>
+      <button mat-raised-button color="primary" (click)="submitVote()">Submit Vote</button>
       <p class="mat-body-1">
         Total Votes for Poll: {{p.totalVotes}}
       </p>

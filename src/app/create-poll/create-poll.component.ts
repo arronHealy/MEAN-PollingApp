@@ -17,6 +17,7 @@ export class CreatePollComponent implements OnInit {
   options: PollOption[] = [];
   staticId: number = 0;
   question: string;
+  
 
   constructor(public ps: PollService) { }
 
@@ -40,6 +41,7 @@ export class CreatePollComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('questionInput')).value = '';
     (<HTMLInputElement>document.getElementById('optionArea')).value = '';
     this.options = [];
+    
   }
 
   addPollOption(pollQuestion: string, pollAnswer: string){

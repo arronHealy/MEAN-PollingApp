@@ -12,6 +12,9 @@ export class PollListComponent implements OnInit {
 
   polls: Poll[] = [];
 
+  selectedPoll: number;
+  selectedVote: number;
+
   constructor(public ps: PollService) { }
 
   getPolls(){
@@ -21,6 +24,20 @@ export class PollListComponent implements OnInit {
 
   ngOnInit() {
     this.polls = this.getPolls();
+  }
+
+  submitVote(){
+
+    this.polls[this.selectedPoll].options[this.selectedVote].numVotes++;
+    this.polls[this.selectedPoll].totalVotes++;
+
+  }//submitVote
+
+  setVote(voteId: number, pollId: number){
+    this.selectedVote = voteId;
+    this.selectedPoll = pollId;
+    console.log('poll id: ' + pollId);
+    console.log('option index: ' + voteId);
   }
 
 }
