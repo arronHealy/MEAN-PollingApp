@@ -42,6 +42,7 @@
 
 <mat-card *ngIf="options.length > 0">
   <mat-card-title>Your Poll Question</mat-card-title>
+  <br>
   <mat-card-subtitle>{{question}}</mat-card-subtitle>
   <mat-card-subtitle>Your Poll Options</mat-card-subtitle>
   <mat-list *ngFor="let o of options">
@@ -50,7 +51,12 @@
       <br><br>
       Number of Votes: {{o.numVotes}}
       <br><br>
+      <!--<button id="deleteOption" mat-raised-button color="warn">Delete</button>-->
     </mat-list-item>
+    <button mat-raised-button color="warn" (click)="deleteOption(o.optionId)">Delete</button>
+    <button mat-raised-button color="primary" (click)="editOption(pollOption.value, o.optionId)">Edit</button>
+    <mat-error *ngIf="pollOption.invalid || pollOption.length <= 0">Please enter Edited Text in Text Area then Click Edit Button</mat-error>
+    <br>
     <hr>
     <br><br>
   </mat-list>

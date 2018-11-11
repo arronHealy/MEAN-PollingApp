@@ -67,6 +67,33 @@ export class CreatePollComponent implements OnInit {
   
   }//addPollOption
 
+  deleteOption(optionId: number){
+
+    for(var i = 0; i < this.options.length; i++){
+      if(optionId === this.options[i].optionId){
+        this.options.splice(i, 1);
+      }
+    }
+  }//deleteOption
+
+  editOption(editedAnswer: string, optionId: number){
+
+    if(editedAnswer.length <= 0){
+      return;
+    }//if
+
+    for(var i = 0; i < this.options.length; i++){
+
+      if(optionId === this.options[i].optionId){
+        this.options[i].answer = editedAnswer;
+      }//if
+
+    }//for
+
+    (<HTMLInputElement>document.getElementById('optionArea')).value = '';
+
+  }//editOption
+
   ngOnInit() {
   }
 
