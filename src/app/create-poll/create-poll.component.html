@@ -32,7 +32,6 @@
     <br>
     <br>
     <br>
-    <!--<button id="submit" mat-raised-button color="primary" type="submit">Submit Poll</button>-->
   </form>
   <button id="submit" mat-raised-button color="primary" (click)="createPoll()">Submit Poll</button>
   <button id="optionButton" mat-raised-button color="accent" (click)="addPollOption(pollQuestion.value, pollOption.value)">Add Poll Option</button>
@@ -45,16 +44,15 @@
   <br>
   <mat-card-subtitle>{{question}}</mat-card-subtitle>
   <mat-card-subtitle>Your Poll Options</mat-card-subtitle>
-  <mat-list *ngFor="let o of options">
+  <mat-list *ngFor="let o of options; let i = index">
     <mat-list-item class="mat-body-1">
-      Poll Answer {{o.optionId + 1}}: {{o.answer}}
+      Poll Answer {{i + 1}}: {{o.answer}}
       <br><br>
       Number of Votes: {{o.numVotes}}
       <br><br>
-      <!--<button id="deleteOption" mat-raised-button color="warn">Delete</button>-->
     </mat-list-item>
-    <button mat-raised-button color="warn" (click)="deleteOption(o.optionId)">Delete</button>
-    <button mat-raised-button color="primary" (click)="editOption(pollOption.value, o.optionId)">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteOption(i)">Delete</button>
+    <button mat-raised-button color="primary" (click)="editOption(pollOption.value, i)">Edit</button>
     <mat-error *ngIf="pollOption.invalid || pollOption.length <= 0">Please enter Edited Text in Text Area then Click Edit Button</mat-error>
     <br>
     <hr>

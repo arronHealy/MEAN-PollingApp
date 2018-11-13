@@ -30,11 +30,12 @@ export class CreatePollComponent implements OnInit {
 
     this.poll = {
       question: this.question,
+      votePick: -1,
       options: this.options,
       totalVotes: 0
     };
 
-    this.ps.addPoll(this.poll);
+    this.ps.addPoll(this.poll).subscribe();
 
     console.log(this.poll);
 
@@ -55,27 +56,21 @@ export class CreatePollComponent implements OnInit {
     this.option = {
       answer: pollAnswer,
       numVotes: 0,
-      optionId: this.staticId
+      optionId: this.options.length
     };
-   
-    this.staticId += 1;
-    //console.log('staticId '+ this.staticId);
+
+    console.log('option id is: ' + this.option.optionId);
 
     this.options.push(this.option);
 
-    //console.log('option object '+ this.option.answer);
-    //console.log('option array ' + this.options[0].answer);
     (<HTMLInputElement>document.getElementById('optionArea')).value = '';
-  
+    
   }//addPollOption
 
   deleteOption(optionId: number){
 
-    for(var i = 0; i < this.options.length; i++){
-      if(optionId === this.options[i].optionId){
-        this.options.splice(i, 1);
-      }
-    }
+    this.options.splice(optionId, 1);
+
   }//deleteOption
 
   editOption(editedAnswer: string, optionId: number){
@@ -84,13 +79,7 @@ export class CreatePollComponent implements OnInit {
       return;
     }//if
 
-    for(var i = 0; i < this.options.length; i++){
-
-      if(optionId === this.options[i].optionId){
-        this.options[i].answer = editedAnswer;
-      }//if
-
-    }//for
+    this.options[optionId].answer = editedAnswer;
 
     (<HTMLInputElement>document.getElementById('optionArea')).value = '';
 

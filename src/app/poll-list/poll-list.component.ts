@@ -19,17 +19,34 @@ export class PollListComponent implements OnInit {
 
   getPolls(){
 
-    return this.ps.getPolls();
+    return this.ps.getPolls().subscribe(data => {
+      this.polls = data;
+    });
+  }
+
+  deletePoll(id: String){
+    console.log('delete poll id: ' + id);
+
+    this.ps.deletePoll(id).subscribe(() => {
+      //this.ngOnInit();
+    });
+    this.ngOnInit();
+
   }
 
   ngOnInit() {
-    this.polls = this.getPolls();
+    this.getPolls();
   }
 
-  submitVote(){
+  submitVote(id: String, poll: Poll){
 
-    this.polls[this.selectedPoll].options[this.selectedVote].numVotes++;
-    this.polls[this.selectedPoll].totalVotes++;
+    console.log('vote index to submit vote: ' + this.selectedVote);
+
+    this.ps.submitVote(id, poll, this.selectedVote).subscribe(() => {
+      
+    });
+    //this.polls[this.selectedPoll].options[this.selectedVote].numVotes++;
+    //this.polls[this.selectedPoll].totalVotes++;
 
   }//submitVote
 

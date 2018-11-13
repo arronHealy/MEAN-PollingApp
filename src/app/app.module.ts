@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioModule, MatDividerModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, MatListModule} from '@angular/material';
 import { RouterModule, Routes} from '@angular/router';
 import { PollService } from 'src/app/poll.service';
+import { EditPollComponent } from './edit-poll/edit-poll.component';
 
 const appRoutes: Routes = [
   {
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     AppComponent,
     CreatePollComponent,
     PollListComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    EditPollComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
