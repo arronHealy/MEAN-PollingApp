@@ -23,6 +23,10 @@ const appRoutes: Routes = [
     path: 'create',
     component: CreatePollComponent
   },
+  {
+    path: 'edit/:id',
+    component: EditPollComponent
+  }
 ];
 
 

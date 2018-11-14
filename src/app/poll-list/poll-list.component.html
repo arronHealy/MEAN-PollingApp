@@ -2,14 +2,14 @@
     <mat-expansion-panel *ngFor="let p of polls; let pollId = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-        {{p.question}}
+        <h3>{{p.question}}</h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <hr>
       <mat-list *ngFor="let o of p.options; let voteOption = index">
         <mat-list-item>
         <mat-radio-button (click)="setVote(voteOption, pollId)"></mat-radio-button>
-         Option {{voteOption + 1}} : {{o.answer}}
+         Option {{voteOption + 1}}: &nbsp;&nbsp; <h4>{{o.answer}}</h4>
         </mat-list-item>
         <p id="numVotes" class="mat-body-1" *ngIf="p.totalVotes > 0">
           {{o.answer}} has {{(o.numVotes / p.totalVotes) * 100 | number}}% of the Votes. 
@@ -17,12 +17,16 @@
         <br>
         <hr>
       </mat-list>
+
       <br>
-      <button mat-raised-button color="warn" (click)="deletePoll(p._id)">Delete Poll</button>
-      <button mat-raised-button color="primary" (click)="submitVote(p._id, p)">Submit Vote</button>
-      <p class="mat-body-1">
+      <h4>
         Total Votes for Poll: {{p.totalVotes}}
-      </p>
+      </h4>
+
+      <button mat-raised-button color="warn" (click)="deletePoll(p._id)">Delete Poll</button>
+      <button mat-raised-button color="accent" [routerLink]="['/edit', p._id]">Edit Poll</button>
+      <button mat-raised-button color="primary" (click)="submitVote(p._id, p)">Submit Vote</button>
+      
     </mat-expansion-panel>
     <br>
     <br>

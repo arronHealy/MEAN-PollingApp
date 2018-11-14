@@ -1,3 +1,60 @@
-<p>
-  edit-poll works!
-</p>
+<mat-card>
+  <form #editForm="ngForm">
+    <mat-form-field>
+      <input matInput
+      id="questionInput"
+      type="text"
+      name="editQuestion"
+      ngModel="{{pollModel.question}}"
+      required
+      minlength="3"
+      placeholder="Enter your Edited Polls Question"
+      #editQuestion="ngModel">
+      <mat-error *ngIf="editQuestion.invalid || editQuestion.length <= 0"></mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      id="optionArea" 
+      matInput
+      rows="4"
+      name="editOption"
+      type="text"
+      ngModel
+      required
+      minlength="3"
+      placeholder="Enter a Edited Poll option"
+      #editOption="ngModel">
+
+      </textarea>
+      <mat-error *ngIf="editOption.invalid || editOption.length <= 0">Please enter valid poll option</mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <br>
+  </form>
+  <button id="submit" mat-raised-button color="primary" (click)="createPoll()">Submit Poll</button>
+  <button id="optionButton" mat-raised-button color="accent" (click)="addPollOption(editQuestion.value, editOption.value)">Add Poll Option</button>
+</mat-card>
+<br>
+<br>
+
+<mat-card>
+  <mat-card-title>Your Poll Question</mat-card-title>
+  <br>
+  <mat-card-subtitle>{{pollModel.question}}</mat-card-subtitle>
+  <mat-card-subtitle>Your Poll Options</mat-card-subtitle>
+  
+  <mat-list *ngFor="let o of pollOptions; let i = index">
+    <mat-list-item class="mat-body-1">
+      Poll Answer {{i + 1}}: {{o.answer}}
+      <br><br>
+    </mat-list-item>
+    <button mat-raised-button color="warn" (click)="deleteOption(i)">Delete</button>
+    <button mat-raised-button color="primary" (click)="editOption(pollOption.value, i)">Edit</button>
+    <mat-error *ngIf="editOption.invalid || editOption.length <= 0">Please enter Edited Text in Text Area then Click Edit Button</mat-error>
+    <br>
+    <hr>
+    <br><br>
+  </mat-list>
+
+</mat-card>

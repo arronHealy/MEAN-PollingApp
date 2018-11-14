@@ -30,7 +30,6 @@ export class CreatePollComponent implements OnInit {
 
     this.poll = {
       question: this.question,
-      votePick: -1,
       options: this.options,
       totalVotes: 0
     };
@@ -55,11 +54,8 @@ export class CreatePollComponent implements OnInit {
 
     this.option = {
       answer: pollAnswer,
-      numVotes: 0,
-      optionId: this.options.length
+      numVotes: 0
     };
-
-    console.log('option id is: ' + this.option.optionId);
 
     this.options.push(this.option);
 

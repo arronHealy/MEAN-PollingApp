@@ -17,7 +17,6 @@ var PollOptionSchema = new Schema({
 
 var PollSchema = new Schema({
     question: String,
-    votePick: Number,
     options: [PollOptionSchema],
     totalVotes: Number
 });
@@ -42,7 +41,6 @@ app.post('/api/polls', function(req, res) {
 
     PollModel.create({
         question: req.body.question,
-        votePicked: req.body.votePicked,
         options: req.body.options,
         totalVotes: req.body.totalVotes
     });
@@ -59,6 +57,19 @@ app.get('/api/polls', function(req, res) {
         }
         else{
             res.json(polls);
+        }
+    });
+});
+
+
+app.get('/api/polls/:id', function(req, res) {
+
+    PollModel.find( {_id: req.params.id}, function(err, data) {
+        if(err){
+            return handleError(err);
+        }
+        else{
+            res.json(data);
         }
     });
 });

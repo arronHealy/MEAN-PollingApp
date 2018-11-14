@@ -30,6 +30,10 @@ export class PollService {
     return this.http.get('http://localhost:8081/api/polls');
   }
 
+  editGetPoll(id: string): Observable<any>{
+    return this.http.get('http://localhost:8081/api/polls/' + id);
+  }
+
   deletePoll(id: String): Observable<any>{
     return this.http.delete('http://localhost:8081/api/polls/' + id);
   }
@@ -41,7 +45,6 @@ export class PollService {
 
     this.updatedPoll = {
       question: pollVote.question,
-      votePick: pollOption,
       options: pollVote.options,
       totalVotes: pollVote.totalVotes
     };
