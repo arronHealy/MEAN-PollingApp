@@ -28,9 +28,9 @@ export class PollListComponent implements OnInit {
     console.log('delete poll id: ' + id);
 
     this.ps.deletePoll(id).subscribe(() => {
-      //this.ngOnInit();
+      this.ngOnInit();
     });
-    this.ngOnInit();
+    //this.ngOnInit();
 
   }
 
@@ -45,9 +45,7 @@ export class PollListComponent implements OnInit {
     this.ps.submitVote(id, poll, this.selectedVote).subscribe(() => {
       
     });
-    //this.polls[this.selectedPoll].options[this.selectedVote].numVotes++;
-    //this.polls[this.selectedPoll].totalVotes++;
-
+    
   }//submitVote
 
   setVote(voteId: number, pollId: number){

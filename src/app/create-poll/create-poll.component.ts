@@ -21,12 +21,14 @@ export class CreatePollComponent implements OnInit {
 
   constructor(public ps: PollService) { }
 
-  createPoll(){
+  createPoll(pollQuestion: string){
     
     //check number of poll options
     if(this.options.length < 2){
       return;
     }//if
+
+    this.question = pollQuestion;
 
     this.poll = {
       question: this.question,
@@ -44,13 +46,11 @@ export class CreatePollComponent implements OnInit {
     
   }
 
-  addPollOption(pollQuestion: string, pollAnswer: string){
+  addPollOption(pollAnswer: string){
 
     if(pollAnswer.length <= 0){
       return;
     }
-
-    this.question = pollQuestion;
 
     this.option = {
       answer: pollAnswer,
@@ -59,7 +59,7 @@ export class CreatePollComponent implements OnInit {
 
     this.options.push(this.option);
 
-    (<HTMLInputElement>document.getElementById('optionArea')).value = '';
+    (<HTMLInputElement>document.getElementById('optionArea')).value = null;
     
   }//addPollOption
 

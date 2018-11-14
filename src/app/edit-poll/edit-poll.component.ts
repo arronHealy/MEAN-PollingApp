@@ -19,6 +19,8 @@ export class EditPollComponent implements OnInit {
 
   pollOptions: PollOption[];
 
+  option: PollOption;
+
   constructor(private router: Router, private route: ActivatedRoute, private ps: PollService) { }
 
   ngOnInit() {
@@ -27,6 +29,7 @@ export class EditPollComponent implements OnInit {
     this.ps.editGetPoll(this.route.snapshot.params['id'])
     .subscribe(data => {
       this.poll = data;
+    
       console.log(this.poll);
       this.modelPoll();
     });
@@ -46,15 +49,55 @@ export class EditPollComponent implements OnInit {
     console.log('pollModel option 0: ' + this.pollModel.options);
     console.log('poll model total votes: ' + this.pollModel.totalVotes);
 
-  }
+  }//modelPoll
 
-  printPoll(){
-    console.log('poll question: ' + this.poll[0].question);
-    console.log('poll options: ' + this.poll[0].options);
-  }
+  addPollOption(pollAnswer: string){
 
-  editPoll(){
+    if(pollAnswer.length <= 0){
+      return;
+    }
 
-  }
+    this.option = {
+      answer: pollAnswer,
+      numVotes: 0
+    };
+
+    this.pollModel.options.push(this.option);
+
+    (<HTMLInputElement>document.getElementById('optionArea')).value = '';
+    
+  }//addPollOption
+
+  deleteOption(index: number){
+
+    if(this.pollModel.options[index].numVotes > 0){
+      this.pollModel.totalVotes -= this.pollModel.options[index].numVotes;
+    }
+
+    this.pollModel.options.splice(index, 1);
+
+  }//deleteOption
+
+  editPollOption(editedAnswer: string, optionId: number){
+
+    if(editedAnswer.length <= 0){
+      return;
+    }//if
+
+    this.pollModel.options[optionId].answer = editedAnswer;
+
+    (<HTMLInputElement>document.getElementById('optionArea')).value = '';
+
+  }//editOption
+
+  updatePoll(editQuestion: string){
+
+    this.pollModel.question = editQuestion;
+
+    this.ps.updatePoll(this.poll[0]._id, this.pollModel).subscribe(() => {
+      this.router.navigate(['/list']);
+    });
+
+  }//updatePoll
 
 }

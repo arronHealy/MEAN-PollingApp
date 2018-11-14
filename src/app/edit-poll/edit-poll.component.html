@@ -32,8 +32,8 @@
     <br>
     <br>
   </form>
-  <button id="submit" mat-raised-button color="primary" (click)="createPoll()">Submit Poll</button>
-  <button id="optionButton" mat-raised-button color="accent" (click)="addPollOption(editQuestion.value, editOption.value)">Add Poll Option</button>
+  <button mat-raised-button color="primary" (click)="updatePoll(editQuestion.value)">Save New Poll</button>
+  <button mat-raised-button color="accent" (click)="addPollOption(editOption.value)">Add Poll Option</button>
 </mat-card>
 <br>
 <br>
@@ -50,7 +50,7 @@
       <br><br>
     </mat-list-item>
     <button mat-raised-button color="warn" (click)="deleteOption(i)">Delete</button>
-    <button mat-raised-button color="primary" (click)="editOption(pollOption.value, i)">Edit</button>
+    <button mat-raised-button color="primary" (click)="editPollOption(editOption.value, i)">Edit</button>
     <mat-error *ngIf="editOption.invalid || editOption.length <= 0">Please enter Edited Text in Text Area then Click Edit Button</mat-error>
     <br>
     <hr>

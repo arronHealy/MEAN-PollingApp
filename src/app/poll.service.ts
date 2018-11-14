@@ -14,29 +14,30 @@ export class PollService {
 
   updatedPoll: Poll;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+  }
 
   addPoll(poll: Poll): Observable<any>{
 
-    //this.polls.push(poll);
     this.poll = poll;
-    //this.polls.push(this.poll);
+
     return this.http.post('http://localhost:8081/api/polls', this.poll);
-    //console.log('poll in service \n' + poll);
+    
   }//addPoll
 
   getPolls(): Observable<any>{
 
     return this.http.get('http://localhost:8081/api/polls');
-  }
+  }//getPolls
 
   editGetPoll(id: string): Observable<any>{
     return this.http.get('http://localhost:8081/api/polls/' + id);
-  }
+  }//editGetPoll
 
   deletePoll(id: String): Observable<any>{
     return this.http.delete('http://localhost:8081/api/polls/' + id);
-  }
+  }//deletePoll
 
   submitVote(id: String, pollVote: Poll, pollOption: number): Observable<any>{
 
@@ -48,12 +49,14 @@ export class PollService {
       options: pollVote.options,
       totalVotes: pollVote.totalVotes
     };
-
-    //this.updatedPoll = pollVote;
-    //this.updatedPoll.votePicked = pollOption;
-
+  
     return this.http.put('http://localhost:8081/api/polls/'+ id, this.updatedPoll);
-  }
+  }//submitVote
+
+  updatePoll(pollId: String, editedPoll: Poll): Observable<any>{
+
+    return this.http.put('http://localhost:8081/api/polls/' + pollId, editedPoll);
+  }//updatePoll
 
  
 
