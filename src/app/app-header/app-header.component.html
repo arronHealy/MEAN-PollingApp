@@ -1,1 +1,11 @@
-<mat-toolbar color="primary">Polling App</mat-toolbar>
+<mat-toolbar id="toolbar" color="primary">
+    <mat-toolbar-row>
+       Polling App 
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+        <button mat-button [routerLink]="['/create']"><b>Create Poll</b></button>
+        <button mat-button [routerLink]="['/list']"><b>List Polls</b></button>        
+    </mat-toolbar-row>
+   
+</mat-toolbar>
