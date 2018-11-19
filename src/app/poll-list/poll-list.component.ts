@@ -10,13 +10,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PollListComponent implements OnInit {
 
+  //poll array to hold 
   polls: Poll[] = [];
 
+  //variables to get vote selected
   selectedPoll: number;
   selectedVote: number;
 
   constructor(public ps: PollService) { }
 
+  //get polls returns all polls from service 
   getPolls(){
 
     return this.ps.getPolls().subscribe(data => {
@@ -24,35 +27,35 @@ export class PollListComponent implements OnInit {
     });
   }
 
+  //delete poll takes poll id deletes from service function
   deletePoll(id: String){
-    console.log('delete poll id: ' + id);
-
+    //console.log('delete poll id: ' + id);
     this.ps.deletePoll(id).subscribe(() => {
       this.ngOnInit();
     });
-    //this.ngOnInit();
 
   }
 
+  //call get polls on each initialization
   ngOnInit() {
     this.getPolls();
   }
 
+  ////submitVote passes id & poll to service function
   submitVote(id: String, poll: Poll){
-
-    console.log('vote index to submit vote: ' + this.selectedVote);
-
+    //console.log('vote index to submit vote: ' + this.selectedVote);
     this.ps.submitVote(id, poll, this.selectedVote).subscribe(() => {
       
     });
     
   }//submitVote
 
+  //set votes based on index passed in
   setVote(voteId: number, pollId: number){
     this.selectedVote = voteId;
     this.selectedPoll = pollId;
-    console.log('poll id: ' + pollId);
-    console.log('option index: ' + voteId);
+    //console.log('poll id: ' + pollId);
+    //console.log('option index: ' + voteId);
   }
 
 }

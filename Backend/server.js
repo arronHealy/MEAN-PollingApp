@@ -1,12 +1,14 @@
 var express = require('express');
 var app = express();
+
 var path = require('path');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-//const url = 'mongodb://arronHealy:IrksDory15@ds137913.mlab.com:37913/learning-mongo-db';
 var mongoDb = 'mongodb://arronHealy:IrksDory15@ds137913.mlab.com:37913/learning-mongo-db';
+
 mongoose.connect(mongoDb);
+
 
 var Schema = mongoose.Schema;
 
@@ -23,6 +25,8 @@ var PollSchema = new Schema({
 
 var PollModel = mongoose.model('PollModel', PollSchema);
 
+//------------------------------------------------------------------
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -33,6 +37,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+//------------------------------------------------------------------
 
 app.post('/api/polls', function(req, res) {
     console.log(req.body.question);
@@ -49,6 +54,8 @@ app.post('/api/polls', function(req, res) {
 
 });
 
+//------------------------------------------------------------------
+
 app.get('/api/polls', function(req, res) {
     
     PollModel.find(function(err, polls) {
@@ -61,6 +68,7 @@ app.get('/api/polls', function(req, res) {
     });
 });
 
+//------------------------------------------------------------------
 
 app.get('/api/polls/:id', function(req, res) {
 
@@ -74,12 +82,15 @@ app.get('/api/polls/:id', function(req, res) {
     });
 });
 
+//------------------------------------------------------------------
+
 app.delete('/api/polls/:id', function(req, res) {
     console.log('server delete id: ' + req.params.id);
 
     PollModel.deleteOne({ _id: req.params.id }, function(err) {});
 });
 
+//------------------------------------------------------------------
 
 app.put('/api/polls/:id', function(req, res){
     
@@ -95,19 +106,8 @@ app.put('/api/polls/:id', function(req, res){
     
 });
 
-/*
-app.put('/api/polls/:id', function(req, res) {
+//------------------------------------------------------------------
 
-    PollModel.findByIdAndUpdate(req.params.id, req.body, function(err, poll) {
-        if(err){
-            return next(err);
-        }
-        else{
-            res.json(poll);
-        }
-    })
-});
-*/
 
 app.listen(8080);
 

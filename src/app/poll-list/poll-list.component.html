@@ -1,37 +1,60 @@
+<!-- mat accordion holds all polls -->
 <mat-accordion multi="true" *ngIf="polls.length > 0">
-    <mat-expansion-panel *ngFor="let p of polls; let pollId = index">
+  
+  <!-- ngFor loop over polls place in expansion panel -->
+  <mat-expansion-panel *ngFor="let p of polls; let pollId = index">
+      <!-- polls header question -->
       <mat-expansion-panel-header>
-        <mat-panel-title>
-        <h3>{{p.question}}</h3>
-        </mat-panel-title>
+          <mat-panel-title>
+            <h3>{{p.question}}</h3>
+          </mat-panel-title>
       </mat-expansion-panel-header>
+
       <hr>
+      
+      <!-- loop over poll answers & display -->
       <mat-list *ngFor="let o of p.options; let voteOption = index">
+        <!-- poll answer list item -->
         <mat-list-item>
-        <mat-radio-button (click)="setVote(voteOption, pollId)"></mat-radio-button>
-         Option {{voteOption + 1}}: &nbsp;&nbsp; <h4>{{o.answer}}</h4>
+          <!-- display poll answer radio button for selection -->
+          <!-- setVote passes in index of item in list & polls id-->
+          <mat-radio-button (click)="setVote(voteOption, pollId)"></mat-radio-button>
+
+          <!-- Display option index & answer -->
+          Option {{voteOption + 1}}: &nbsp;&nbsp; <h4>{{o.answer}}</h4>
         </mat-list-item>
+        
+        <!-- display poll votes stats -->
         <p id="numVotes" class="mat-body-1" *ngIf="p.totalVotes > 0">
           {{o.answer}} has {{(o.numVotes / p.totalVotes) * 100 | number}}% of the Votes. 
         </p>
+        
         <br>
         <hr>
       </mat-list>
 
       <br>
+
+      <!-- display poll total votes -->
       <h4>
         Total Votes for Poll: {{p.totalVotes}}
       </h4>
 
+      <!-- Buttons for submitting vote, editing a poll & delete poll -->
+      <!-- click delete - deletes poll from DB passes in poll id-->
+      <!-- click edit - re-routes to edit page passes in poll id-->
+      <!-- click submit - passes in poll & poll id to increment vote-->
       <button mat-raised-button color="warn" (click)="deletePoll(p._id)">Delete Poll</button>
       <button mat-raised-button color="accent" [routerLink]="['/edit', p._id]">Edit Poll</button>
       <button mat-raised-button color="primary" (click)="submitVote(p._id, p)">Submit Vote</button>
       
     </mat-expansion-panel>
+    
     <br>
     <br>
   </mat-accordion>
   
+  <!-- display if no polls in database -->
   <p class="text-info mat-body-1" *ngIf="polls.length <= 0">
   No polls added yet...
   </p>

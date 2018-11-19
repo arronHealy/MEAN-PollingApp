@@ -1,11 +1,20 @@
+<!-- mat tool bar as app header -->
 <mat-toolbar id="toolbar" color="primary">
+    
+    <!--Header rows App title & router links to pages -->
     <mat-toolbar-row>
-       Polling App 
+        Polling App  
     </mat-toolbar-row>
 
+    <!-- router links to create & list page -->
     <mat-toolbar-row>
         <button mat-button [routerLink]="['/create']"><b>Create Poll</b></button>
         <button mat-button [routerLink]="['/list']"><b>List Polls</b></button>        
     </mat-toolbar-row>
-   
+
 </mat-toolbar>
+      
+
+
+
+
