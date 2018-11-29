@@ -60,11 +60,15 @@ export class CreatePollComponent implements OnInit {
   }//createPoll
 
   //add poll option takes answer
-  addPollOption(pollAnswer: string){
+  addPollOption(pollAnswer: string, pollQuestion: string){
 
     //return if invalid
     if(pollAnswer.length <= 0){
       return;
+    }
+
+    if(pollQuestion.length > 0){
+      this.question = pollQuestion;
     }
 
     //build poll option model

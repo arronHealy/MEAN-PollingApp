@@ -13,6 +13,7 @@ import { MatRadioModule, MatDividerModule, MatInputModule, MatCardModule, MatBut
 import { RouterModule, Routes} from '@angular/router';
 import { PollService } from 'src/app/poll.service';
 import { EditPollComponent } from './edit-poll/edit-poll.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   {
@@ -26,6 +27,10 @@ const appRoutes: Routes = [
   {
     path: 'edit/:id',
     component: EditPollComponent
+  },
+  {
+    path: '',
+    component: HomeComponent
   }
 ];
 
@@ -36,7 +41,8 @@ const appRoutes: Routes = [
     CreatePollComponent,
     PollListComponent,
     AppHeaderComponent,
-    EditPollComponent
+    EditPollComponent,
+    HomeComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

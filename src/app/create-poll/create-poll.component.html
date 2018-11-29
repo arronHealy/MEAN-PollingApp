@@ -43,7 +43,7 @@
 
   <!-- poll buttons add poll answers & submit your poll -->
   <button mat-raised-button color="primary" (click)="createPoll(pollQuestion.value)">Submit Poll</button>
-  <button mat-raised-button color="accent" (click)="addPollOption(pollOption.value)">Add Poll Option</button>
+  <button mat-raised-button color="accent" (click)="addPollOption(pollOption.value, pollQuestion.value)">Add Poll Option</button>
 </mat-card>
 
 

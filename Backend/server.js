@@ -60,8 +60,7 @@ app.post('/api/polls', function(req, res) {
         totalVotes: req.body.totalVotes
     });
 
-    //console.log('Inserting item');
-    //res.send("Polls added successfully");
+    res.status(201).json({message: "POST - Poll Created Successfully"});
 
 });
 
@@ -73,10 +72,10 @@ app.get('/api/polls', function(req, res) {
     
     PollModel.find(function(err, polls) {
         if(err){
-            res.send(err);
+            res.status(404).json({message: "Error GET Failed Polls not found"});
         }
         else{
-            res.json(polls);
+            res.status(201).json(polls);
         }
     });
 });
@@ -90,10 +89,13 @@ app.get('/api/polls/:id', function(req, res) {
 //use find method to match poll 
     PollModel.find( {_id: req.params.id}, function(err, data) {
         if(err){
+
+            res.status(404).json({message: "Error GET Failed Poll Not Found"});
+
             return handleError(err);
         }
         else{
-            res.json(data);
+            res.status(201).json(data);
         }
     });
 });
@@ -105,7 +107,14 @@ app.get('/api/polls/:id', function(req, res) {
 app.delete('/api/polls/:id', function(req, res) {
     console.log('server delete id: ' + req.params.id);
 
-    PollModel.deleteOne({ _id: req.params.id }, function(err) {});
+    PollModel.deleteOne({ _id: req.params.id }, function(err) {
+        if(err){
+            res.status(404).json({message: "DELETE - Not Deleted Poll Not Found"})
+        }
+        else{
+            res.status(200).json({message: "Poll Successfully Deleted"});
+        }        
+    });
 });
 
 //------------------------------------------------------------------
@@ -117,10 +126,12 @@ app.put('/api/polls/:id', function(req, res){
 //find by ID and update poll
     PollModel.findByIdAndUpdate(req.params.id, req.body, function(err, poll) {
         if(err){
+            res.status(404).json({message: "PUT - No Update Poll Not Found"});
+
             return next(err);
         }
         else{
-            res.json(poll);
+            res.status(201).json(poll);
         }
     });
     
@@ -130,12 +141,12 @@ app.put('/api/polls/:id', function(req, res){
 
 //launch app on local host 8081 from angular folder
 
-app.use("/", express.static(path.join(__dirname, "AngularApp")));
+app.use("/", express.static(path.join(__dirname, "AngularPollingApp")));
 
 
 app.get("/", function(req, res) {
 
-    res.sendFile(path.join(__dirname, "AngularApp", "index.html"));
+    res.sendFile(path.join(__dirname, "AngularPollingApp", "index.html"));
 });
 
 //------------------------------------------------------------------
