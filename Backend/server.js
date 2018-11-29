@@ -130,12 +130,12 @@ app.put('/api/polls/:id', function(req, res){
 
 //launch app on local host 8081 from angular folder
 
-app.use("/", express.static(path.join(__dirname, "angular")));
+app.use("/", express.static(path.join(__dirname, "AngularApp")));
 
 
 app.get("/", function(req, res) {
 
-    res.sendFile(path.join(__dirname, "angular", "index.html"));
+    res.sendFile(path.join(__dirname, "AngularApp", "index.html"));
 });
 
 //------------------------------------------------------------------
